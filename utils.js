@@ -45,3 +45,11 @@ function getRGBA(value) {
   const B = value > 0 ? 0 : 255;
   return "rgba(" + R + "," + G + "," + B + "," + alpha + ")";
 }
+function bringWithinRange(val, left, right) {
+  if (left > right) {
+    let temp = right;
+    right = left;
+    left = temp;
+  }
+  return Math.min(Math.max(val, left), right);
+}

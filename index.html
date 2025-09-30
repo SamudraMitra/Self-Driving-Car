@@ -6,8 +6,14 @@
 <body>
   <canvas id="carCanvas"></canvas>
   <div id="verticalButtons">
-    <button onClick="save()">🗃️</button>"
-    <button onClick="discard()">🗑️</button>"
+    <button onClick="save()">🗃️</button>
+    <button onClick="discard()">🗑️</button>
+    <input type="text" id="rayLength" placeholder="select ray Length">
+    <input type="text" id="rayCount" placeholder="select ray Count">
+    <input type="text" id="raySpread" placeholder="Select ray Spread">
+    <input type="text" id="N" placeholder="Select number of cars">
+    <input type="text" id="mutationDose" placeholder="Select mutation Rate">
+    <button onClick="saveConfig()">Submit</button>
   </div>
   <canvas id="networkCanvas"></canvas>
   <script src="visualizer.js"></script>

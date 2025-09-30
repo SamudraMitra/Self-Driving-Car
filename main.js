@@ -8,9 +8,20 @@ const carCtx = carCanvas.getContext("2d");
 const networkCtx = networkCanvas.getContext("2d");
 const road = new Road(carCanvas.width / 2, carCanvas.width * 0.9);
 // const car = new Car(road.getLaneCenter(1), 100, 30, 50, "KEYS");
-const N = 500;
-const mutationDose = 0.1;
+const N = localStorage.getItem("N")
+  ? bringWithinRange(parseInt(localStorage.getItem("N")), 1, 1000)
+  : 100;
+const mutationDose = localStorage.getItem("mutationDose")
+  ? bringWithinRange(
+      parseFloat(localStorage.getItem("mutationDose")),
+      0,
+      0.9999
+    )
+  : 0.3;
+
 const cars = generateCars(N);
+// console.log(cars);
+
 let bestCar = cars[0];
 if (localStorage.getItem("bestBrain")) {
   for (let i = 0; i < cars.length; i++) {
@@ -76,4 +87,18 @@ function animate(time) {
   networkCtx.lineDashOffset = -time / 50;
   Visualizer.drawNetwork(networkCtx, bestCar.brain);
   requestAnimationFrame(animate);
+}
+function saveConfig() {
+  localStorage.clear();
+  const rayLength = document.getElementById("rayLength").value;
+  if (rayLength) localStorage.setItem("rayLength", rayLength);
+  const rayCount = document.getElementById("rayCount").value;
+  if (rayCount) localStorage.setItem("rayCount", rayCount);
+  const raySpread = document.getElementById("raySpread").value;
+  if (raySpread) localStorage.setItem("raySpread", raySpread);
+  const N = document.getElementById("N").value;
+  if (N) localStorage.setItem("N", N);
+  const mutationDose = document.getElementById("mutationDose").value;
+  if (mutationDose) localStorage.setItem("mutationDose", mutationDose);
+  window.location.reload();
 }
